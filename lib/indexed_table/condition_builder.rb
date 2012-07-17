@@ -1,15 +1,15 @@
-class Builder
-  # Ruby 1.8.7 fix
-  instance_methods.each do |m|
-    undef_method(m)  unless m.match(/^__|instance_eval/)
-  end
+class Builder  < BasicObject
+# Ruby 1.8.7 fix
+#  instance_methods.each do |m|
+#    undef_method(m)  unless m.match(/^__|instance_eval/)
+#  end
 
   def initialize
     @builders = []
   end
 
   def method_missing(name, *args)
-    builder = ColumnConditionBuilder.new(name.to_sym)
+    builder = ::ColumnConditionBuilder.new(name.to_sym)
     @builders << builder
     builder
   end

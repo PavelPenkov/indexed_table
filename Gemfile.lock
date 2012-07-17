@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    indexed_table (0.0.1)
+      rbtree
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -17,5 +23,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rbtree
+  indexed_table!
   rspec

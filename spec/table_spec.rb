@@ -59,9 +59,15 @@ describe Table do
     end
   end
 
-  describe "#select" do
+  describe "#query" do
     before do
       @table.insert(:gender => true, :age => 50, :height => 150, :index => 1, :balance => 0.0)
+    end
+
+    it "returns all rows if no query given" do
+      res = @table.query
+      res.count.should == 1
+      res.first[:age].should == 50
     end
 
     context "single predicate" do

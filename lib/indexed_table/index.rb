@@ -5,7 +5,7 @@ class Index
   def initialize(*columns)
     @columns = columns.clone
     # @tree = java.util.TreeMap.new
-    @tree = RBTree.new
+    @tree = MultiRBTree.new
     @lower_bound = Array.new(columns.length)
     @upper_bound = Array.new(columns.length)
   end
@@ -16,12 +16,7 @@ class Index
       @lower_bound[i] = x if @lower_bound[i] == nil or @lower_bound[i] > x
       @upper_bound[i] = x if @upper_bound[i] == nil or  @upper_bound[i] < x
     end
-    curr_val = @tree[key]
-    if curr_val
-      curr_val.push(row)
-    else
-      @tree.store(key, [row])
-    end
+    @tree.store(key, row)
   end
 
   def tree
@@ -53,7 +48,7 @@ class Index
     # puts "from_key: #{from_key.inspect}, to_key: #{to_key.inspect}"
     if (from_key <=> to_key) <= 0 # Java TreeMap fix
       # map_to_array(@tree.subMap(from_key, true, to_key, true))
-      @tree.bound(from_key, to_key)
+      @tree.bound(from_key, to_key).map{|k,v| v}
     else
       []
     end

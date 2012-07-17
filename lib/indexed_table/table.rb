@@ -1,5 +1,5 @@
-require 'condition_builder'
-require 'index'
+# require 'condition_builder'
+# require 'index'
 
 class Table
   include Enumerable
@@ -11,11 +11,15 @@ class Table
   end
 
   def query(&block)
-    pr = Predicate.new(&block)
-    if ix = find_index(pr)
-      ix.select(pr)
+    if block_given?
+      pr = Predicate.new(&block)
+      if ix = find_index(pr)
+        ix.select(pr)
+      else
+        @rows.select{|row| pr.call(row)}
+      end
     else
-      @rows.select{|row| pr.call(row)}
+      @rows.each
     end
   end
 

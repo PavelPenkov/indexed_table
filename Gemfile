@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'rbtree'
-
-group :development, :test do
-  gem 'rspec'
-end
+# Specify your gem's dependencies in table.gemspec
+gemspec
