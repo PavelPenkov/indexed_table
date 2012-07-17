@@ -4,7 +4,10 @@ indexed_table
 
 Использование
 -------------
+В Gemfile добавить `gem "indexed_table", :git => "git://github.com/PavelPenkov/indexed_table.git"` или скачать, собрать и поставить.
 ```ruby
+    require 'indexed_table'
+    
     table = Table.new
     table.create_index :x, :y
 
